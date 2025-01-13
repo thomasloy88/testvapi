@@ -10,7 +10,7 @@
       padding: 0;
       height: 100%; 
       width: 100%;
-      background: linear-gradient(135deg, #3e0063, #0d0d0d);
+      background: linear-gradient(135deg, #1a237e, #000000);
       display: flex; 
       justify-content: center; 
       align-items: center;
@@ -23,13 +23,14 @@
       width: 400px;
       height: 400px;
       border-radius: 30px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%);
-      backdrop-filter: blur(15px);
-      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+      background: radial-gradient(circle at center, rgba(41, 98, 255, 0.1), rgba(0, 0, 0, 0.8));
+      backdrop-filter: blur(20px);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8),
+                  inset 0 2px 20px rgba(255, 255, 255, 0.1);
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 2px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       overflow: hidden;
     }
 
@@ -37,31 +38,33 @@
       width: 100px !important;
       height: 100px !important;
       border-radius: 50% !important;
-      background: linear-gradient(135deg, #4caf50, #81c784) !important;
-      box-shadow: 0 10px 20px rgba(0, 255, 128, 0.7), 0 0 20px rgba(0, 255, 128, 0.5) !important;
+      background: linear-gradient(135deg, #2962ff, #0039cb) !important;
+      box-shadow: 0 10px 20px rgba(41, 98, 255, 0.4),
+                  0 0 30px rgba(41, 98, 255, 0.2) !important;
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .vapi-btn:hover {
-      transform: scale(1.2);
-      box-shadow: 0 20px 40px rgba(0, 255, 128, 0.9), 0 0 40px rgba(0, 255, 128, 0.7) !important;
+      transform: scale(1.1);
+      box-shadow: 0 15px 30px rgba(41, 98, 255, 0.6),
+                  0 0 50px rgba(41, 98, 255, 0.3) !important;
     }
 
     .vapi-btn:active {
-      transform: scale(0.9);
-      box-shadow: 0 5px 10px rgba(0, 255, 128, 0.5) !important;
+      transform: scale(0.95);
+      box-shadow: 0 5px 15px rgba(41, 98, 255, 0.3) !important;
     }
 
-    /* Telefon-Button in leuchtendem Blau */
     .phone-btn {
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #0099ff, #00c6ff);
-      box-shadow: 0 10px 20px rgba(0, 153, 255, 0.7), 0 0 20px rgba(0, 153, 255, 0.5);
+      background: linear-gradient(135deg, #2962ff, #0039cb);
+      box-shadow: 0 10px 20px rgba(41, 98, 255, 0.4),
+                  0 0 30px rgba(41, 98, 255, 0.2);
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -69,13 +72,23 @@
     }
 
     .phone-btn:hover {
-      transform: scale(1.2);
-      box-shadow: 0 20px 40px rgba(0, 153, 255, 0.9), 0 0 40px rgba(0, 153, 255, 0.7);
+      transform: scale(1.1);
+      box-shadow: 0 15px 30px rgba(41, 98, 255, 0.6),
+                  0 0 50px rgba(41, 98, 255, 0.3);
     }
 
     .phone-btn:active {
-      transform: scale(0.9);
-      box-shadow: 0 5px 10px rgba(0, 153, 255, 0.5);
+      transform: scale(0.95);
+      box-shadow: 0 5px 15px rgba(41, 98, 255, 0.3);
+    }
+
+    .phone-btn::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, rgba(41, 98, 255, 0.5), transparent);
+      border-radius: 50%;
+      z-index: -1;
     }
 
     .phone-btn::after {
@@ -85,16 +98,19 @@
       left: 50%;
       width: 120px;
       height: 120px;
-      background: rgba(0, 153, 255, 0.3);
+      background: rgba(41, 98, 255, 0.15);
       border-radius: 50%;
       transform: translate(-50%, -50%) scale(1);
-      animation: glow 2s infinite;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
 
-    @keyframes glow {
+    @keyframes pulse {
       0% {
         transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
+        opacity: 0.8;
+      }
+      50% {
+        opacity: 0.2;
       }
       100% {
         transform: translate(-50%, -50%) scale(1.5);
@@ -109,6 +125,17 @@
     .phone-btn-icon {
       width: 40px;
       height: 40px;
+      filter: brightness(0) invert(1);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
     }
   </style>
 </head>
@@ -130,21 +157,21 @@
       width: "100px",
       height: "100px",
       idle: {
-        color: `#81c784`,
+        color: `#2962ff`,
         type: "round",
         title: "Need help?",
         subtitle: "Talk to our AI",
         icon: `https://unpkg.com/lucide-static@0.321.0/icons/mic.svg`,
       },
       loading: {
-        color: `#4caf50`,
+        color: `#0039cb`,
         type: "round",
         title: "Connecting...",
         subtitle: "Please wait",
         icon: `https://unpkg.com/lucide-static@0.321.0/icons/loader-2.svg`,
       },
       active: {
-        color: `#ff4b4b`,
+        color: `#d32f2f`,
         type: "round",
         title: "Active call",
         subtitle: "Hang up",
